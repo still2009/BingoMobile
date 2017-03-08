@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="bean.InfoBean" table="info" dynamic-insert="true" dynamic-update="true">
+		<id name="id" column="id" type="int">
+			<generator class="increment"></generator>
+		</id>
+		<many-to-one name="user" column="user_id" class="bean.UserBean" lazy="false" cascade="all"/>
+		<property name="infoDirection" column="info_direction" type="int" not-null="true"/>
+		<property name="infoTag" column="info_tag" type="string" not-null="true"/>
+		<property name="infoTitle" column="info_title" type="string" not-null="true"/>
+		<property name="infoContent" column="info_content" type="string" not-null="true"/>
+		<property name="infoImagePointer" column="info_image_pointer" type="string"/>
+		<property name="infoDeadline" column="info_deadline" type="long" not-null="true"/>
+		<property name="infoPayment" column="info_payment" type="int" not-null="true"/>
+		<property name="infoStatus" column="info_status" type="string" not-null="true"/>
+		<property name="infoTime" column="info_time" type="long" not-null="true"/>
+		<set name="infoRels" cascade="all" inverse="true" table="user2info" lazy="false">
+			<key column="info_id"/>
+			<one-to-many class="bean.InfoRelBean"/>	
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="bean.OrderBean" table="order_list" dynamic-insert="true" dynamic-update="true">
+		<id name="id" column="id" type="int">
+			<generator class="identity"></generator>
+		</id>
+		<many-to-one name="user" column="user_id" class="bean.UserBean" cascade="save-update" lazy="false"/>
+		<many-to-one name="doc" column="doc_id" class="bean.DocBean" cascade="save-update" lazy="false"/>
+		<property name="price" column="price" type="int" not-null="true"/>
+		<property name="orderTime" column="order_time" type="long" not-null="true"/>
+		<property name="docTitle" column="doc_title" type="string" not-null="true"/>
+		<property name="orderStatus" column="order_status" type="string" not-null="true"/>
+	</class>
+</hibernate-mapping>

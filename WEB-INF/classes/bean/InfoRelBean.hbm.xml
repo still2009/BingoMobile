@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="bean.InfoRelBean" table="user2info" dynamic-insert="true" dynamic-update="true">
+		<composite-id>
+            <key-many-to-one name="user" column="user_id"/>
+            <key-many-to-one name="info" column="info_id"/>
+        </composite-id>
+		<many-to-one name="user" column="user_id" class="bean.UserBean" insert="false" update="false" lazy="false"/>
+		<many-to-one name="info" column="info_id" class="bean.InfoBean" insert="false" update="false" lazy="false"/>
+		<property name="relType" column="rel_type" type="string" not-null="true"/>
+		<property name="relTime" column="rel_time" type="long" not-null="true"/>
+		<property name="relStatus" column="rel_status" type="string" not-null="true"/>
+		<!-- relStatusContent允许为空 -->
+		<property name="relStatusContent" column="rel_status_content" type="string" not-null="false"/>
+	</class>
+</hibernate-mapping>
